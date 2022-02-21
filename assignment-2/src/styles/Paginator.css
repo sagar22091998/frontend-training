@@ -1,0 +1,19 @@
+.paginator {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  flex-wrap: wrap;
+}
+
+.paginator--btn {
+  cursor: pointer;
+  margin: 0.5rem;
+  border: 1px solid black;
+  background-color: rgb(255, 200, 152);
+}
+
+.paginator--btn-active {
+  color: #fff;
+  background: #000;
+}

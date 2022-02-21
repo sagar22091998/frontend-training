@@ -1,0 +1,53 @@
+.details {
+  position: relative;
+  width: 800px;
+  height: 500px;
+  background: #fff;
+}
+
+.details--close {
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border: 2px solid #000;
+  border-radius: 50%;
+  font-weight: bold;
+  position: absolute;
+  color: #000;
+  right: 5px;
+  top: 5px;
+}
+
+.details--container {
+  display: flex;
+  flex-direction: column;
+}
+
+.details--info {
+  padding: 0.5rem;
+  font-weight: bold;
+  border-bottom: 1px dotted #000;
+}
+.details--container:last-child {
+  border-bottom: none;
+}
+
+.details--loading {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.details--hit,
+.details--flop {
+  font-size: 2rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.details--hit {
+  color: green;
+}
+.details--flop {
+  color: red;
+}

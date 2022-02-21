@@ -1,0 +1,11 @@
+.results {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.error {
+  text-align: center;
+  font-size: 1.25rem;
+  color: red;
+}

@@ -1,0 +1,35 @@
+.search-form {
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid black;
+}
+
+.search-form--container {
+  margin: 1rem 0;
+}
+
+.search-form--input {
+  font-size: 1.25rem;
+  padding: 1rem;
+}
+
+.search-form--input input {
+  font-size: 1.25rem;
+  margin: 0 0.5rem;
+}
+
+.search-form--btn {
+  display: inline;
+  font-size: 1.25rem;
+  width: 100px;
+  margin: 0 auto;
+}
+
+.search-form--loading {
+  display: flex;
+  justify-content: center;
+  margin: 5rem 0;
+}
