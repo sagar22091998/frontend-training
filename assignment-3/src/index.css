@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.align-center {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+.todo-item {
+  background: white;
+  border: 2px solid black;
+  margin: 1rem 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.todo-item--top {
+  text-align: center;
+  color: blueviolet;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-bottom: 1px dotted black;
+}
+
+.todo-item--bottom {
+  padding: 0 2rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.todo-item--icons {
+  display: flex;
+}
+
+.todo-item--icon {
+  font-size: 2rem;
+  margin: 0 1rem;
+}
