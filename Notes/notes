@@ -1,0 +1,249 @@
+###### PROJECT REACTOR ######
+
+=> Why Reactive programming?
+
+Application -> Database // Until request khatam nahi hota that particular thread will be blocked
+Millions of request in today's world => Millions of thread(which is not possible , hence blocked )
+Solution is reactive programming. => Here we will use parallel calls.
+
+=> What is Reactive Programming
+
+	- Asynchronous and non-blocking
+	- Event/Message driven
+	- Functional Code
+	- Back pressure on Data Streams 
+	
+ -> We will requestForData() and then the thread will be free for other use.
+ -> Now when database is ready then we'll request for data and we'll get it back. 
+ 	onNext(1),onNext(2), ... onNext(n),onComplete()
+ 
+ -> BackPressure
+  	Say application can handle less data then you could say to DB hodor
+  	-> 10000 record ho database ke pass.. wo 10 10 karke bhejega.
+  	
+ -> High load data application use Reactive Programming
+ 
+ ->Netty server sping
+ 
+ => Reactive Streams Specification (4 Interfaces)
+ 	-Publisher
+ 	-Subscriber
+ 	-Subscription
+ 	-Processor
+ 	
+ 	public interface Publisher<T>{
+ 		void subscribe(Subscriber<? super T> var1);
+ 	}
+ 	// Database , Server [Data Sender]
+ 	
+ 	public interface Subscriber<T>{
+ 		void onSubscribe(Subscription var1);
+ 		void onNext(T var1);
+ 		void onError(Throwable var1);
+ 		void onComplete();
+ 	}
+ 	//Client that will subscribe to Data Source
+ 	
+ 	public interface Subscription<T>{
+ 		void request(long var1); //var1 how much data you want
+ 		void cancel();
+ 	}
+ 	// It connects Publisher and Subscriber
+ 	
+ 	public interface Processor<T,R> extends Subscriber<T>, Publisher<R>{
+ 	}
+ 	// This can act as both Publisher & Subscriber 
+ 
+ => Project Reactor - Implementation of reactive Stream Specification & it is a Reactive Lib
+ 	
+ => Flux and Mono (Part of reactive-core module)
+	- These are reactive types that implements Reactive Stream Speci
+	- Flux represents 0 to N elements  , Mono represents 0 to 1 elements
+	- Flux emits data which could be modified via operator
+	- Above dono same for mono bas only 1 elements	
+	
+=> Flux & mono Basic
+
+	public Flux<String> fruitsFlux(){
+         	return Flux.fromIterable(List.of("Apple","Bar","Car")).log();
+    	}
+    	 
+	FluxAndMonoServices flux = new FluxAndMonoServices();
+        flux.fruitsFlux().subscribe(System.out::println)
+        
+       public Mono<String> fruitsMono(){
+		return Mono.just("Car").log();
+       }
+
+    	public static void main(String[] args) {
+        
+        FluxAndMonoServices flux = new FluxAndMonoServices();
+        flux.fruitsMono().subscribe(System.out::println);
+        
+// .log() will log all the things happening
+    	 
+=> Junit Test for flux and mono 
+
+class FluxAndMonoServicesTest {
+
+    FluxAndMonoServices fluxAndMonoServices =  new FluxAndMonoServices();
+
+    @Test
+    void fruitsFlux() {
+        var flux = fluxAndMonoServices.fruitsFlux();
+
+        StepVerifier.create(flux)
+                .expectNext("Apple","Bar","Car")
+                .verifyComplete();
+    }
+
+    @Test
+    void fruitsMono() {
+        var mono = fluxAndMonoServices.fruitsMono();
+
+        StepVerifier.create(mono)
+                .expectNext("Apple")  
+                .verifyComplete();
+    }
+
+}
+
+=> map() will work same as stream waala map.	
+
+    public Flux<String> fruitsFlux(){
+         return Flux.fromIterable(List.of("Apple","Bat","Car")).map(String::toUpperCase).log();
+    } 
+
+=> Similarly map() & filter()
+    	 
+=> Flat map (further small flux mein spiliting)
+     public Flux<String> fruitsFluxFlatMap(){
+        return Flux.fromIterable(List.of("Mango","Orange","Banane"))
+                .flatMap(s-> Flux.just(s.split(""))).log();
+    }
+    // Flux elements will br likr "M","a","n"...."e"
+    // To mimic Async flatmap ke liye => .delayElements(Duration.ofMillis(new Random().nextInt(1000)))
+    
+    
+    // Above ka test
+    StepVerifier.create(flux)
+        .expectNexCoutt(17) // Number of flux elements are 17 ka test
+        .verifyComplete();
+        
+=> Concat map :- same as flat map but will preserve order in case of async.
+=> flatMapMany :- Mono lo flat karte same Flux return karne ke liye
+
+=> transform() //Separate your filter functions to reuse it.
+
+    public Flux<String> fruitsFluxFilterWithTransform(){
+    	Function<Flux<String>,Flux<String>> filterByLength = data -> data.filter(s -> s.length()>5);
+        
+        return Flux.fromIterable(List.of("Mango","Orange","Banane"))
+                .transform(filterByLength)
+                .log();
+    } 
+    
+=> defaultIfEmpty("Default")  // Khali aaya filter wagera ke bad to use this 
+=> .switchIfEmpty(Flux.just("A","B")) //Assign a new list if empty.
+
+=> concat & concatWith // To concat flux
+
+    public Flux<String> fluxConcat(){
+        var flux1 = Flux.just("Applr");
+        var flux2 = Flux.just("Vat","Car");
+
+        return flux2.concatWith(flux1);
+     //   return Flux.concat(flux1,flux2);
+    }
+    //You Will be return a Flux of ("Applr","Vat","Car")
+    //Two Monos could be combined to get flux
+    
+=> mergeWith & merge() // Similar to concat but till work for combining 2 flux's of diff publishers async
+=> mergeSequential() // merge operator but preserve order
+
+=> zip & zipWith // To operatr on inside data of Flux and combine them
+	public Flux<String> fruitsFluxZip() {
+		var fruits = Flux.just("Mango","Orange");
+		var veggies = Flux.just("Tomato","Lemon");
+
+		return Flux.zip(fruits,veggies,
+		        (first,second) -> first+second).log();
+	    }
+
+	// Will return flux of ("MangoTomato","OrangeLemon")
+
+
+	// For three or more publisher
+	public Flux<String> fruitsFluxZipTuple() {
+		var fruits = Flux.just("Mango","Orange");
+		var veggies = Flux.just("Tomato","Lemon");
+		var moreVeggies = Flux.just("Potato","Beans");
+
+		return Flux.zip(fruits,veggies,moreVeggies)
+		        .map(objects -> objects.getT1() + objects.getT2() + objects.getT3());
+	    }
+	    
+	// Zip also works with Mono as well.
+	
+=> doOn* // Do things if error/nest/cancel etc
+
+    public Flux<String> fruitsFluxFilterDoOn(int number) {
+        return Flux.fromIterable(List.of("Mango","Orange","Banana"))
+                .filter(s -> s.length() > number)
+                .doOnNext(s -> {
+                    System.out.println("s = " + s);
+                })
+                .doOnSubscribe(subscription -> {
+                    System.out.println("subscription.toString() = " + subscription.toString());
+                })
+                .doOnComplete(() -> System.out.println("Completed!!!"));
+    }
+    
+=> onErrorReturn() // Returns default value if error occured
+
+	public Flux<String> fruitsFluxOnErrorReturn() {
+		return Flux.just("Apple","Mango")
+		        .concatWith(Flux.error(
+		                new RuntimeException("Exception Occurred")
+		        ))
+		        .onErrorReturn("Orange");
+	    }
+=>  A stream is a sequence of objects that supports various methods which can be pipelined to produce the desired result.
+	    
+=> onErrorContinue() // Jo data error dera hai usko drop kar denga baakiyo mein operation continue
+
+	    public Flux<String> fruitsFluxOnErrorContinue() {
+		return Flux.just("Apple","Mango","Orange")
+		        .map(s -> {
+		            if (s.equalsIgnoreCase("Mango"))
+		                throw new RuntimeException("Exception Occurred");
+		            return s.toUpperCase();
+		        })
+		        .onErrorContinue((e,f) -> {
+		            System.out.println("e = " + e);
+		            System.out.println("f = " + f);
+		});
+
+=> onErrorMap() // To combine your exception with other exception **Test** for this} // You could write .expectError(RuntimeException.class)
+=> .doOnError() Similar like above.
+=> .retry() , retry(int x) // no arg = infinite retry , arg = utne retry
+=> .retryWhen() // Better retry with attemps & kitne time baad  
+
+**Back Pressure**
+=> flux.subscribe(BaseSubscriber<Integer>() {
+	//BackPressure methods 
+}) 
+
+	// hookOnSubscribe(Subscription subs) mein request(int x) //send only x vals
+	// hookOnNext -> har onNext mein chalega
+
+
+=> @Data (adds getter setters), @AllArgsCtor, @NoArgsCtor
+
+=> onBackPressureDrop() // Dropped values are saved in InnerQueue
+=> onBackPressureBuffer() //Values in Buffer
+
+=> Hot & Cold Stream
+	cold -> hamesha same data
+	hot -> already emiitting data & in btw a sub occur, wahi se shuru hoga
+// Last mein debugging.

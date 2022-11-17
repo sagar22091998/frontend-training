@@ -1,0 +1,971 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<!--
+    v2.xml Message Definitions Version v2.2  - messages
+    HL7® Version 2.2, © Health Level Seven, Inc.  All rights reserved.  HL7 and Health Level Seven are registered trademarks of Health Level Seven, Inc.
+-->
+<xsd:schema
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:hl7-org:v2xml"
+	xmlns:hl7="urn:com.sun:encoder-hl7-1.0"
+    targetNamespace="urn:hl7-org:v2xml">
+
+	<!--xmlns:hl7="urn:com.sun:encoder-hl7-1.0" -->
+
+	<!-- Datatypes -->
+	<xsd:simpleType name="ST">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="ID">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="NM">
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+	<!-- Complex Datatypes-->
+	<xsd:attributeGroup name="TS.1.ATTRIBUTES">
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="time of an event"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="TS.1.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="TS.1.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="TS.1" type="TS.1.CONTENT"/>
+	<xsd:attributeGroup name="TS.2.ATTRIBUTES">
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="degree of precision"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="TS.2.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="TS.2.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="TS.2" type="TS.2.CONTENT"/>
+	<xsd:complexType name="TS">
+		<xsd:sequence>
+			<xsd:element ref="TS.1" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="TS.2" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:attributeGroup name="CQ_QUANTITY.1.ATTRIBUTES">
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="quantity"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="CQ_QUANTITY.1.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="CQ_QUANTITY.1.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="CQ_QUANTITY.1" type="CQ_QUANTITY.1.CONTENT"/>
+	<xsd:attributeGroup name="CQ_QUANTITY.2.ATTRIBUTES">
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="units"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="CQ_QUANTITY.2.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="CQ_QUANTITY.2.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="CQ_QUANTITY.2" type="CQ_QUANTITY.2.CONTENT"/>
+	<xsd:complexType name="CQ_QUANTITY">
+		<xsd:sequence>
+			<xsd:element ref="CQ_QUANTITY.1" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="CQ_QUANTITY.2" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:attributeGroup name="CM_VR.1.ATTRIBUTES">
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="First data code value"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="CM_VR.1.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="CM_VR.1.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="CM_VR.1" type="CM_VR.1.CONTENT"/>
+	<xsd:attributeGroup name="CM_VR.2.ATTRIBUTES">
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Last data code calue"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="CM_VR.2.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="CM_VR.2.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="CM_VR.2" type="CM_VR.2.CONTENT"/>
+	<xsd:complexType name="CM_VR">
+		<xsd:sequence>
+			<xsd:element ref="CM_VR.1" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="CM_VR.2" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:attributeGroup name="CM_BATCH_TOTAL.1.ATTRIBUTES">
+		<xsd:attribute name="Type" type="xsd:string" fixed="NM"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch total 1"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="CM_BATCH_TOTAL.1.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="NM">
+				<xsd:attributeGroup ref="CM_BATCH_TOTAL.1.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="CM_BATCH_TOTAL.1" type="CM_BATCH_TOTAL.1.CONTENT"/>
+	<xsd:attributeGroup name="CM_BATCH_TOTAL.2.ATTRIBUTES">
+		<xsd:attribute name="Type" type="xsd:string" fixed="NM"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch total 2"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="CM_BATCH_TOTAL.2.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="NM">
+				<xsd:attributeGroup ref="CM_BATCH_TOTAL.2.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="CM_BATCH_TOTAL.2" type="CM_BATCH_TOTAL.2.CONTENT"/>
+	<xsd:complexType name="CM_BATCH_TOTAL">
+		<xsd:sequence>
+			<xsd:element ref="CM_BATCH_TOTAL.1" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="CM_BATCH_TOTAL.2" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Fields -->
+	<xsd:attributeGroup name="QRD.1.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="26"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="25"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="TS"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Query date / time"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.1.CONTENT">
+		<xsd:complexContent>
+			<xsd:extension base="TS">
+				<xsd:attributeGroup ref="QRD.1.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.1" type="QRD.1.CONTENT"/>
+	<xsd:attributeGroup name="QRD.2.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="1"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="26"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ID"/>
+		<xsd:attribute name="Table" type="xsd:string" fixed="HL70106"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Query Format Code"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.2.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ID">
+				<xsd:attributeGroup ref="QRD.2.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.2" type="QRD.2.CONTENT"/>
+	<xsd:attributeGroup name="QRD.3.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="1"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="27"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ID"/>
+		<xsd:attribute name="Table" type="xsd:string" fixed="HL70091"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Query Priority"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.3.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ID">
+				<xsd:attributeGroup ref="QRD.3.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.3" type="QRD.3.CONTENT"/>
+	<xsd:attributeGroup name="QRD.4.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="10"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="28"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Query ID"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.4.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="QRD.4.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.4" type="QRD.4.CONTENT"/>
+	<xsd:attributeGroup name="QRD.5.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="1"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="29"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ID"/>
+		<xsd:attribute name="Table" type="xsd:string" fixed="HL70107"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Deferred Response Type"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.5.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ID">
+				<xsd:attributeGroup ref="QRD.5.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.5" type="QRD.5.CONTENT"/>
+	<xsd:attributeGroup name="QRD.6.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="26"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="30"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="TS"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Deferred response date / time"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.6.CONTENT">
+		<xsd:complexContent>
+			<xsd:extension base="TS">
+				<xsd:attributeGroup ref="QRD.6.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.6" type="QRD.6.CONTENT"/>
+	<xsd:attributeGroup name="QRD.7.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="10"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="31"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="CQ_QUANTITY"/>
+		<xsd:attribute name="Table" type="xsd:string" fixed="HL70126"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Quantity Limited Request"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.7.CONTENT">
+		<xsd:complexContent>
+			<xsd:extension base="CQ_QUANTITY">
+				<xsd:attributeGroup ref="QRD.7.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.7" type="QRD.7.CONTENT"/>
+	<xsd:attributeGroup name="QRD.8.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="32"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Who Subject Filter"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.8.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="QRD.8.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.8" type="QRD.8.CONTENT"/>
+	<xsd:attributeGroup name="QRD.9.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="3"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="33"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ID"/>
+		<xsd:attribute name="Table" type="xsd:string" fixed="HL70048"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="What Subject Filter"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.9.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ID">
+				<xsd:attributeGroup ref="QRD.9.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.9" type="QRD.9.CONTENT"/>
+	<xsd:attributeGroup name="QRD.10.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="34"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="What Department Data Code"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.10.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="QRD.10.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.10" type="QRD.10.CONTENT"/>
+	<xsd:attributeGroup name="QRD.11.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="35"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="CM_VR"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="What data code value qualifier"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.11.CONTENT">
+		<xsd:complexContent>
+			<xsd:extension base="CM_VR">
+				<xsd:attributeGroup ref="QRD.11.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.11" type="QRD.11.CONTENT"/>
+	<xsd:attributeGroup name="QRD.12.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="1"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="36"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ID"/>
+		<xsd:attribute name="Table" type="xsd:string" fixed="HL70108"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Query Results Level"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRD.12.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ID">
+				<xsd:attributeGroup ref="QRD.12.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRD.12" type="QRD.12.CONTENT"/>
+		
+	<xsd:attributeGroup name="BHS.1.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="1"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="81"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Field Separator"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.1.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.1.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.1" type="BHS.1.CONTENT"/>
+	<xsd:attributeGroup name="BHS.2.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="4"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="82"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Encoding Characters"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.2.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.2.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.2" type="BHS.2.CONTENT"/>
+	<xsd:attributeGroup name="BHS.3.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="15"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="83"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Sending Application"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.3.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.3.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.3" type="BHS.3.CONTENT"/>
+	<xsd:attributeGroup name="BHS.4.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="84"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Sending Facility"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.4.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.4.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.4" type="BHS.4.CONTENT"/>
+	<xsd:attributeGroup name="BHS.5.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="30"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="85"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Receiving Application"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.5.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.5.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.5" type="BHS.5.CONTENT"/>
+	<xsd:attributeGroup name="BHS.6.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="30"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="86"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Receiving Facility"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.6.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.6.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.6" type="BHS.6.CONTENT"/>
+	<xsd:attributeGroup name="BHS.7.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="26"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="87"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="TS"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch creation date / time"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.7.CONTENT">
+		<xsd:complexContent>
+			<xsd:extension base="TS">
+				<xsd:attributeGroup ref="BHS.7.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.7" type="BHS.7.CONTENT"/>
+	<xsd:attributeGroup name="BHS.8.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="40"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="88"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Security"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.8.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.8.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.8" type="BHS.8.CONTENT"/>
+	<xsd:attributeGroup name="BHS.9.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="89"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch name / ID / type"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.9.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.9.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.9" type="BHS.9.CONTENT"/>
+	<xsd:attributeGroup name="BHS.10.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="80"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="90"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Comment"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.10.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.10.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.10" type="BHS.10.CONTENT"/>
+	<xsd:attributeGroup name="BHS.11.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="91"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Control ID"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.11.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.11.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.11" type="BHS.11.CONTENT"/>
+	<xsd:attributeGroup name="BHS.12.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="92"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Reference Batch Control ID"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BHS.12.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BHS.12.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BHS.12" type="BHS.12.CONTENT"/>
+
+	<xsd:attributeGroup name="FHS.1.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="1"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="67"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Field Separator"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.1.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.1.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.1" type="FHS.1.CONTENT"/>
+	<xsd:attributeGroup name="FHS.2.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="4"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="68"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Encoding Characters"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.2.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.2.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.2" type="FHS.2.CONTENT"/>
+	<xsd:attributeGroup name="FHS.3.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="15"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="69"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Sending Application"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.3.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.3.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.3" type="FHS.3.CONTENT"/>
+	<xsd:attributeGroup name="FHS.4.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="70"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Sending Facility"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.4.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.4.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.4" type="FHS.4.CONTENT"/>
+	<xsd:attributeGroup name="FHS.5.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="30"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="71"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Receiving Application"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.5.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.5.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.5" type="FHS.5.CONTENT"/>
+	<xsd:attributeGroup name="FHS.6.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="30"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="72"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Receiving Facility"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.6.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.6.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.6" type="FHS.6.CONTENT"/>
+	<xsd:attributeGroup name="FHS.7.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="26"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="73"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="TS"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File creation date / time"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.7.CONTENT">
+		<xsd:complexContent>
+			<xsd:extension base="TS">
+				<xsd:attributeGroup ref="FHS.7.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.7" type="FHS.7.CONTENT"/>
+	<xsd:attributeGroup name="FHS.8.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="40"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="74"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Security"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.8.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.8.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.8" type="FHS.8.CONTENT"/>
+	<xsd:attributeGroup name="FHS.9.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="75"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File name / ID"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.9.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.9.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.9" type="FHS.9.CONTENT"/>
+	<xsd:attributeGroup name="FHS.10.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="80"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="76"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Header Comment"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.10.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.10.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.10" type="FHS.10.CONTENT"/>
+	<xsd:attributeGroup name="FHS.11.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="77"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Control ID"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.11.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.11.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.11" type="FHS.11.CONTENT"/>
+	<xsd:attributeGroup name="FHS.12.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="78"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Reference File Control ID"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FHS.12.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FHS.12.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FHS.12" type="FHS.12.CONTENT"/>
+		
+	<xsd:attributeGroup name="QRF.1.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="37"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Where Subject Filter"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRF.1.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="QRF.1.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRF.1" type="QRF.1.CONTENT"/>
+	<xsd:attributeGroup name="QRF.2.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="26"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="38"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="TS"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="When data start date / time"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRF.2.CONTENT">
+		<xsd:complexContent>
+			<xsd:extension base="TS">
+				<xsd:attributeGroup ref="QRF.2.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QRF.2" type="QRF.2.CONTENT"/>
+	<xsd:attributeGroup name="QRF.3.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="26"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="39"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="TS"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="When data end date / time"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRF.3.CONTENT">
+		<xsd:complexContent>
+			<xsd:extension base="TS">
+				<xsd:attributeGroup ref="QRF.3.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="QRF.3" type="QRF.3.CONTENT"/>
+	<xsd:attributeGroup name="QRF.4.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="40"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="What User Qualifier"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRF.4.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="QRF.4.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRF.4" type="QRF.4.CONTENT"/>
+	<xsd:attributeGroup name="QRF.5.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="20"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="41"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Other QRY Subject Filter"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRF.5.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="QRF.5.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRF.5" type="QRF.5.CONTENT"/>
+	<xsd:attributeGroup name="QRF.6.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="12"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="42"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ID"/>
+		<xsd:attribute name="Table" type="xsd:string" fixed="HL70156"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Which date / time qualifier"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRF.6.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ID">
+				<xsd:attributeGroup ref="QRF.6.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRF.6" type="QRF.6.CONTENT"/>
+	<xsd:attributeGroup name="QRF.7.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="12"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="43"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ID"/>
+		<xsd:attribute name="Table" type="xsd:string" fixed="HL70157"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Which date / time status qualifier"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRF.7.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ID">
+				<xsd:attributeGroup ref="QRF.7.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRF.7" type="QRF.7.CONTENT"/>
+	<xsd:attributeGroup name="QRF.8.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="12"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="44"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ID"/>
+		<xsd:attribute name="Table" type="xsd:string" fixed="HL70158"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Date / time selection qualifier"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="QRF.8.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ID">
+				<xsd:attributeGroup ref="QRF.8.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="QRF.8" type="QRF.8.CONTENT"/>
+
+	<xsd:attributeGroup name="BTS.1.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="10"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="93"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Message Count"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BTS.1.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BTS.1.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BTS.1" type="BTS.1.CONTENT"/>
+	<xsd:attributeGroup name="BTS.2.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="80"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="94"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Comment"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BTS.2.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="BTS.2.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="BTS.2" type="BTS.2.CONTENT"/>
+	<xsd:attributeGroup name="BTS.3.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="100"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="95"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="CM_BATCH_TOTAL"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="Batch Totals"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="BTS.3.CONTENT">
+		<xsd:complexContent>
+			<xsd:extension base="CM_BATCH_TOTAL">
+				<xsd:attributeGroup ref="BTS.3.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="BTS.3" type="BTS.3.CONTENT"/>
+
+	<xsd:attributeGroup name="FTS.1.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="10"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="79"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="NM"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Batch Count"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FTS.1.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="NM">
+				<xsd:attributeGroup ref="FTS.1.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FTS.1" type="FTS.1.CONTENT"/>
+	<xsd:attributeGroup name="FTS.2.ATTRIBUTES">
+		<xsd:attribute name="MaxLength" fixed="80"/>
+		<xsd:attribute name="Item" type="xsd:string" fixed="80"/>
+		<xsd:attribute name="Type" type="xsd:string" fixed="ST"/>
+		<xsd:attribute name="LongName" type="xsd:string" fixed="File Trailer Comment"/>
+	</xsd:attributeGroup>
+	<xsd:complexType name="FTS.2.CONTENT">
+		<xsd:simpleContent>
+			<xsd:extension base="ST">
+				<xsd:attributeGroup ref="FTS.2.ATTRIBUTES"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="FTS.2" type="FTS.2.CONTENT"/>
+
+	<!--  Segments  -->
+	<xsd:complexType name="QRD.CONTENT">
+		<xsd:sequence>
+			<xsd:element ref="QRD.1" minOccurs="1" maxOccurs="1"/>
+			<xsd:element ref="QRD.2" minOccurs="1" maxOccurs="1"/>
+			<xsd:element ref="QRD.3" minOccurs="1" maxOccurs="1"/>
+			<xsd:element ref="QRD.4" minOccurs="1" maxOccurs="1"/>
+			<xsd:element ref="QRD.5" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="QRD.6" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="QRD.7" minOccurs="1" maxOccurs="1"/>
+			<xsd:element ref="QRD.8" minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element ref="QRD.9" minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element ref="QRD.10" minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element ref="QRD.11" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="QRD.12" minOccurs="0" maxOccurs="1"/>
+			<xsd:any processContents="lax" namespace="##other" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="QRD" type="QRD.CONTENT"/>
+
+	<xsd:complexType name="BHS.CONTENT">
+		<xsd:sequence>
+			<xsd:element ref="BHS.1" minOccurs="1" maxOccurs="1"/>
+			<xsd:element ref="BHS.2" minOccurs="1" maxOccurs="1"/>
+			<xsd:element ref="BHS.3" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BHS.4" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BHS.5" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BHS.6" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BHS.7" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BHS.8" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BHS.9" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BHS.10" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BHS.11" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BHS.12" minOccurs="0" maxOccurs="1"/>
+			<xsd:any processContents="lax" namespace="##other" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="BHS" type="BHS.CONTENT"/>
+
+	<xsd:complexType name="FHS.CONTENT">
+		<xsd:sequence>
+			<xsd:element ref="FHS.1" minOccurs="1" maxOccurs="1"/>
+			<xsd:element ref="FHS.2" minOccurs="1" maxOccurs="1"/>
+			<xsd:element ref="FHS.3" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="FHS.4" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="FHS.5" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="FHS.6" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="FHS.7" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="FHS.8" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="FHS.9" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="FHS.10" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="FHS.11" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="FHS.12" minOccurs="0" maxOccurs="1"/>
+			<xsd:any processContents="lax" namespace="##other" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="FHS" type="FHS.CONTENT"/>
+
+	<xsd:complexType name="QRF.CONTENT">
+		<xsd:sequence>
+			<xsd:element ref="QRF.1" minOccurs="1" maxOccurs="unbounded"/>
+			<xsd:element ref="QRF.2" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="QRF.3" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="QRF.4" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="QRF.5" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="QRF.6" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="QRF.7" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="QRF.8" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:any processContents="lax" namespace="##other" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="QRF" type="QRF.CONTENT"/>
+	<xsd:complexType name="BTS.CONTENT">
+		<xsd:sequence>
+			<xsd:element ref="BTS.1" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BTS.2" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="BTS.3" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:any processContents="lax" namespace="##other" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="BTS" type="BTS.CONTENT"/>
+
+	<xsd:complexType name="FTS.CONTENT">
+		<xsd:sequence>
+			<xsd:element ref="FTS.1" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="FTS.2" minOccurs="0" maxOccurs="1"/>
+			<xsd:any processContents="lax" namespace="##other" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="FTS" type="FTS.CONTENT"/>
+
+    <!-- .. definitions used in batch message -->
+    <xsd:element name="MESSAGEBATCH">
+	<xsd:complexType>
+	    <xsd:sequence>
+		<xsd:element ref="BHS" minOccurs="0" maxOccurs="1" />
+		<xsd:element ref="QRD" minOccurs="0" maxOccurs="1" />
+		<xsd:element ref="QRF"  minOccurs="0" maxOccurs="1" />
+		<xsd:element ref="MESSAGES" minOccurs="0" maxOccurs="unbounded" />
+		<xsd:element ref="BTS" minOccurs="0" maxOccurs="1" />
+	    </xsd:sequence>
+	</xsd:complexType>
+    </xsd:element>
+    <xsd:element name="MESSAGES" type="xsd:string"/>
+    <!-- .. batch message definition -->
+    <xsd:element name="BATCH" type="BATCH.CONTENT"/>
+    <xsd:complexType name="BATCH.CONTENT">
+	<xsd:sequence>
+	    <xsd:element ref="FHS" minOccurs="0" maxOccurs="1" />
+	    <xsd:element ref="MESSAGEBATCH" minOccurs="1" maxOccurs="unbounded" />
+	    <xsd:element ref="FTS" minOccurs="0" maxOccurs="1" />
+	</xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:group name="MESSAGE">
+		<xsd:choice>
+			<xsd:element ref="BATCH" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:choice>
+	</xsd:group>
+</xsd:schema>
